@@ -6,11 +6,15 @@ configuration: Release
   #  - master
   #  - dev
 
-build_script:
+before_build:
   - git submodule init
   - git submodule update --init --recursive
   - md build
   - cd build
   - cmake .. -DRPCLIB_BUILD_TESTS=ON
-  - cmake --build .
+  
+build:
+  project: build/rpc.sln
+
+test_script:
   - .\tests\Release\rpc_test.exe
