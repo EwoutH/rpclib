@@ -12,5 +12,5 @@ build_script:
   - md build
   - cd build
   - cmake .. -DRPCLIB_BUILD_TESTS=ON
-  - cmake --build ..
+  - cmake --build .
   - .\tests\Release\rpc_test.exe
