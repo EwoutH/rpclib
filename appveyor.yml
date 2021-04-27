@@ -1,29 +1,16 @@
-version: 1.0.{build}
-os: Visual Studio 2015
-clone_folder: C:\projects\rpc
-test: off
+image: Visual Studio 2019
+configuration: Release
 
 branches:
-  only:
-    - master
-    - dev
-
-configuration:
-  - Release
-
-environment:
-  matrix:
-    - CMAKE_PLATFORM: "Visual Studio 14 2015"
-    #- CMAKE_PLATFORM: "Visual Studio 15 2017"
-
-install: true
+  #only:
+  #  - master
+  #  - dev
 
 build_script:
-  - cd c:\projects\rpc
   - git submodule init
   - git submodule update --init --recursive
   - md build
   - cd build
-  - cmake -DRPCLIB_BUILD_TESTS=ON -G "%CMAKE_PLATFORM%" ..
-  - cmake --build . --config %CONFIGURATION%
+  - cmake -DRPCLIB_BUILD_TESTS=ON
+  - cmake --build .
   - .\tests\Release\rpc_test.exe
